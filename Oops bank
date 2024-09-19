@@ -1,0 +1,111 @@
+#include <iostream>
+using namespace std;
+class Bank
+{
+  private:
+    float totalAmount, depositeAmount, withdrwalAmount;
+
+  public:
+    int account_no;
+
+    string name;
+
+    void accpet()
+    {
+        cout << "Enter name: ";
+        cin >> name;
+        cout << "Enter account no. : ";
+        cin >> account_no;
+        cout << "Enter total bank balance : ";
+        cin >> totalAmount;
+    }
+    void deposite()
+    {
+        cout << "Enter deopsit amount: ";
+        cin >> depositeAmount;
+        totalAmount += depositeAmount;
+        cout << depositeAmount << " Deposited sucessfully\n";
+        cout <<" total bank balance is "<< totalAmount;
+    }
+    void withdrwal()
+    {
+        cout << "Enter withdrwal amount: ";
+        cin >> withdrwalAmount;
+        if (withdrwalAmount <= totalAmount)
+        {
+            totalAmount -= withdrwalAmount;
+            cout << withdrwalAmount << " withdrwaled sucessfully\n";
+            cout <<" total bank balance is "<< totalAmount;
+        }
+        else
+        {
+            cout << "INSUFFICIENT BANK BALANCE!!! JAao kuch paisa dalwaao!!!!! ";
+        }
+    }
+    void display()
+    {
+        cout << name << "\t" << account_no << "\t" << totalAmount << "\n";
+    }
+};
+int main()
+{
+    Bank b[10];
+    int n, i, pos, flag = 0, ch, CH;
+    cout << "Enter the numbers of bank accounts: ";
+    cin >> n;
+    do
+    {
+        cout << "Menu\n1)Insert\n2)Deposit\n3)Withdrawl\n4)Display\nEnter the choice :-";
+        cin >> ch;
+        switch (ch)
+        {
+        case 1:
+            for (i = 0; i < n; i++)
+                b[i].accpet();
+            break;
+        case 2:
+        {
+            cout << "Enter the account number: ";
+            cin >> pos;
+
+            for (i = 0; i < n; i++)
+            {
+                if (pos == b[i].account_no)
+                {
+                    b[i].deposite();
+                    flag = 1;
+                    break;
+                }
+            }
+        }
+            flag = 0;
+            break;
+        case 3:
+        {
+            cout << "Enter the account number: ";
+            cin >> pos;
+
+            for (i = 0; i < n; i++)
+            {
+                if (pos == b[i].account_no)
+                {
+                    b[i].withdrwal();
+                    flag = 1;
+                    break;
+                }
+            }
+        }
+            flag = 0;
+            break;
+        case 4:
+            cout << "Name\tAccNo. \tTotalBalance\n";
+            for (i = 0; i < n; i++)
+            {
+                b[i].display();
+            }
+        };
+        cout << "\nIf you continue then press 1 and if you want to stop press 0: ";
+        cin >> CH;
+    } while (CH == 1);
+    return 0;
+}
